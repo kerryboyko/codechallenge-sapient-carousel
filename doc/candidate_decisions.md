@@ -43,6 +43,10 @@ I want to get the core front-end build done first, but if time remains, I might 
 
   Through Webpack, I can easily add Sass as any other dependency to the project. But since the project requires interactivity and the CSS used will likely depend on state, as a backup, *Aphrodite* will serve as a CSS-in-JS solution.  
 
+* Utilities: *Lodash*
+
+  Lodash is a functional programming library. Much of it is not used because ES7/TS have included much of the core functionality into the language itself, but the key feature of Lodash is that A) It has code-splitting, meaning you don't need to import the whole library into your bundle to use one method, and B) the Lodash "get" method is very good at handling those cases where object.property?.childProperty can occur. That is - if "property" is undefined, trying to access childProperty throws an ugly JS error. get(object, 'property.childProperty', null); handles it gracefully.  Until some form of Maybe monad is standard in the language, I think I'll always have lodash/get in my toolkit. 
+
 ## Architecture
 
 Here's the architecture pattern I like to use.  I like to think of the application as a ziggurat - built in layers, with these rules. 
