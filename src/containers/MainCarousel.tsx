@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import { getPhotos } from "../store/actions/photos";
+import CarouselHolder from '../containers/CarouselHolder';
 
 interface IMainCarouselState {
   queryField: string;
@@ -17,6 +18,7 @@ export class MainCarousel extends React.Component<any, IMainCarouselState> {
 
     return (
       <div>
+        <CarouselHolder/>
         <input onChange={handleQueryChange} value={queryField} />
         <button onClick={handleGetPhotos}>Search</button>
         <h2>{queryField}</h2>
