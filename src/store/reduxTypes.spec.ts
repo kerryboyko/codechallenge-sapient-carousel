@@ -31,8 +31,7 @@ describe("createActionTypes", () => {
   });
   it("has action types defined", () => {
     expect(actionTypes.carousel).toEqual({
-      LEFT: "carousel.LEFT",
-      RIGHT: "carousel.RIGHT"
+      SET_PAGE: "carousel.SET_PAGE"
     });
     expect(actionTypes.debug).toEqual({
       HYDRATE: "debug.HYDRATE"

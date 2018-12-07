@@ -1,8 +1,12 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
-import { getPhotos } from "../store/actions/photos";
-import CarouselHolder from '../containers/CarouselHolder';
+import { getPhotos, loadPhotos } from "../store/actions/photos";
+import CarouselHolder from "../components/CarouselHolder";
+import { testImages } from "../util/testImages";
+import wrapAroundSlice from "../util/wrapAroundSlice";
+import { IPixabayImage } from "../store/actions/types";
+import { get } from "lodash";
 
 interface IMainCarouselState {
   queryField: string;
@@ -15,13 +19,16 @@ export class MainCarousel extends React.Component<any, IMainCarouselState> {
   public render() {
     const { handleQueryChange, handleGetPhotos } = this;
     const { queryField } = this.state;
-
+    const { actions, images, imagesLoaded } = this.props;
     return (
-      <div>
-        <CarouselHolder/>
-        <input onChange={handleQueryChange} value={queryField} />
-        <button onClick={handleGetPhotos}>Search</button>
-        <h2>{queryField}</h2>
+      <div className="main-carousel">
+        <CarouselHolder images={images} imagesLoaded={imagesLoaded} />
+        <div>
+          <input onChange={handleQueryChange} value={queryField} />
+          <button onClick={handleGetPhotos}>Search</button>
+          <h2>{queryField}</h2>
+          <button onClick={actions.loadMockData}>Load Mock Data</button>
+        </div>
       </div>
     );
   }
@@ -33,18 +40,29 @@ export class MainCarousel extends React.Component<any, IMainCarouselState> {
   };
 }
 
-function mapDispatchToProps(dispatch: Dispatch) {
+const mapStateToProps = (state: any) => {
+  const imagesInStore: IPixabayImage[] = get(state, "photos.hits", []);
+  const imagesLoaded: boolean = imagesInStore.length > 0;
+  const root = state.carousel;
+  const size = 5; // hardcoded for now, but can be dynamic;
+  const transpose = 2; // again, hardcoded for now.
   return {
-    actions: {
-      getPhotos: bindActionCreators(
-        (query: string) => getPhotos(query),
-        dispatch
-      )
-    }
+    images: wrapAroundSlice(imagesInStore, root, size, transpose),
+    imagesLoaded
   };
-}
+};
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  actions: {
+    getPhotos: bindActionCreators(
+      (query: string) => getPhotos(query),
+      dispatch
+    ),
+    loadMockData: bindActionCreators(() => loadPhotos(testImages), dispatch)
+  }
+});
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(MainCarousel);

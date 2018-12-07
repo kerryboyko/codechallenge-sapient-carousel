@@ -20,7 +20,7 @@ export const createActionTypes = (
 };
 
 const actionTypes = {
-  carousel: createActionTypes("carousel", "LEFT", "RIGHT"),
+  carousel: createActionTypes("carousel", "SET_PAGE"),
   debug: createActionTypes("debug", "HYDRATE"),
   photos: createActionTypes("photos", "LOAD_PHOTOS", "CLEAR_PHOTOS")
 }

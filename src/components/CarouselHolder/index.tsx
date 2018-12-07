@@ -1,22 +1,26 @@
 import * as React from "react";
 import ImageSquare from "./ImageSquare";
 import PrevNext from "./PrevNext";
+import "./carousel-holder.css";
 
 const CarouselHolder: React.SFC<any> = (props: any) => {
-  const { images } = props;
+  const { images, imagesLoaded } = props;
   return (
     <div className="carousel">
       <div className="carousel__header">
-        <p className="carousel__header__title">Carousel Test</p>
+        <div className="carousel__header__title">Carousel&nbsp;Test</div>
       </div>
-      <div className="carousel__image-area">
-        {images.map((image: any) => (
-          <ImageSquare
-            image={image}
-            key={image.title || `${Math.random().toString()}`}
-          />
-        ))}
-      </div>
+      {imagesLoaded ? (
+        <div className="carousel__image-area">
+          {images.map((image: any, i: number) => (
+            <ImageSquare
+              image={image}
+              key={image.pageURL || Math.random().toString()}
+              position={i}
+            />
+          ))}
+        </div>
+      ) : null}
       <div className="carousel__footer-area">
         <PrevNext />
       </div>

@@ -3,6 +3,10 @@ export interface IReduxAction {
   payload?: any;
 }
 
+export interface ICarouselReduxAction extends IReduxAction {
+  payload?: number;
+}
+
 export interface ISearchResult {
   totalHits: number;
   hits: IPixabayImage[];

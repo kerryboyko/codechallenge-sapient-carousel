@@ -1,19 +1,16 @@
-import { get } from "lodash";
-import { IReduxAction } from "../actions/types";
 import actionTypes from "../reduxTypes";
+import { ICarouselReduxAction } from "../actions/types";
 
 export const carousel = (
   state: number = 0,
-  action: IReduxAction = { type: "" }
+  action: ICarouselReduxAction = { type: "" }
 ): number => {
   switch (action.type) {
-    case actionTypes.carousel.LEFT:
-      return state - 1;
-    case actionTypes.carousel.RIGHT:
-      if (get(action, "payload.max", false)) {
-        return Math.min(state + 1, action.payload.max);
+    case actionTypes.carousel.SET_PAGE:
+      if(action.payload !== undefined){
+        return action.payload;
       }
-      return state + 1;
+      return state; 
     default:
       return state;
   }
