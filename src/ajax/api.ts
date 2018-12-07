@@ -5,6 +5,15 @@ interface IApiValues {
   key: string;
 }
 
+/* NB: To make sure that the client does not have access to our personal
+   api key for a third party service, the best way to handle this
+   would be to create an endpoint on our own server (or a microservice)
+   that takes the query and makes the request to the api server, 
+   sort of like a pass-through.  If you do this, then not only can you
+   keep this key safe in a secret.env file on your folder, but
+   you can also impliment server-side caching so that you don't end up
+   pinging the Pixabay servers too often (this is actually mentioned)
+   in their API docs */
 const defaultValues: IApiValues = {
   key: `9656065-a4094594c34f9ac14c7fc4c39`,
   url: `https://pixabay.com/api/`
