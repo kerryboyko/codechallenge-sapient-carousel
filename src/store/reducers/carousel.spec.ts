@@ -1,6 +1,5 @@
 import { carousel } from "./carousel";
 import store from "../createStore";
-import testImages from "../../util/testImages";
 import * as carouselActions from "../actions/carousel";
 import actionTypes from "../reduxTypes";
 
@@ -63,6 +62,8 @@ describe("./src/reducers/carousel.ts", () => {
     });
     const c = () => store.getState().carousel;
     it("increments the number properly", () => {
+      // .forEach() would be the natural case for this, but
+      // copy/paste is okay in a test suite.  
       expect(c()).toBe(0);
       store.dispatch(carouselActions.pageNext());
       expect(c()).toBe(1);

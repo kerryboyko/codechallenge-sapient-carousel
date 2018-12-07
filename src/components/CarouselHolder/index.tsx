@@ -1,6 +1,6 @@
 import * as React from "react";
 import ImageSquare from "./ImageSquare";
-import PrevNext from "./PrevNext";
+import PrevNext from "../../containers/PrevNext";
 import "./carousel-holder.css";
 
 const CarouselHolder: React.SFC<any> = (props: any) => {
@@ -22,7 +22,7 @@ const CarouselHolder: React.SFC<any> = (props: any) => {
         </div>
       ) : null}
       <div className="carousel__footer-area">
-        <PrevNext />
+        <PrevNext {...props} />
       </div>
     </div>
   );
