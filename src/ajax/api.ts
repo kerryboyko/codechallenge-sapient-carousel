@@ -38,8 +38,7 @@ class Api {
     }
 
     return await ajax
-      .get(url)
-      .query({ key, q: `${query}&image_type=photo` })
+      .get(`${url}?key=${key}&q=${query.trim().replace(/\s+/g, "+")}&image_type=photo`)
       .then(response => {
         console.log("response", JSON.stringify(response, null, 2));
         return response;

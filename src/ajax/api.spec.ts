@@ -14,7 +14,8 @@ describe("src/ajax/api.ts", () => {
     });
   });
   describe("async Api.getImages()", () => {
-    it("gets images from pixabay", async () => {
+    // this test is removed because we do not want to overload the API
+    xit("gets images from pixabay", async () => {
       const images = await api.getImages("beautiful+landscape");
       expect(images.status).toBe(200);
     });
