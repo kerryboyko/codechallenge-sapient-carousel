@@ -10,6 +10,11 @@
   color: #276696;
   font-size: 50px;
 }
+/* CSS Flexbox seems to be the appropriate choice
+   rather than CSS Grid, mostly because 
+   the display we're dealing with is
+   one-dimensional, not two dimensional
+   */
 
 .carousel__image-area {
   background-color: #ffffff;
@@ -17,7 +22,7 @@
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   padding: 30px;
 }
 
@@ -41,15 +46,14 @@
   padding: 10px 20px;
   margin: 10px 5px;
   background-color: #3f729d;
-  color: #FFFFFF;
-  font-weight:700;
+  color: #ffffff;
+  font-weight: 700;
 }
 
 .prevnext__buttons__button:hover {
   background-color: #276696;
   cursor: pointer;
 }
-
 
 /* https://css-tricks.com/multiple-class-id-selectors/ */
 .prevnext__buttons__button.prev {
@@ -63,16 +67,62 @@
 }
 
 .image-square {
-  width: 150px;
-  height: 100px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  box-shadow: 0px 2px 10px #BBBBBB;
+  margin: 0px 8px 8px 8px;
 }
 
-.image-square.main-image {
-  width: 300px;
-  height: 200px;
+.image-square__primary-image {
+  box-shadow: 0px 2px 10px #bbbbbb;
+  width: 100%;
+}
+
+.image-square__primary-image.position-center {
   box-shadow: 0px 10px 30px #888888;
+  border: 3px solid #3f729d;
+}
+
+.user-credit {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px;
+}
+
+.user-credit__icon-user {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.user-credit__icon-user__icon {
+  border-radius: 50%;
+  width: 40px;
+}
+
+.user-credit__icon-user__user {
+  margin-left: 10px;
+}
+
+/* Breakpoints:
+  @media all and (min-width: 981px) { ... } // large screen
+  @media all and (max-width: 980px) { ... } // medium screen / tablet
+  @media all and (max-width: 480px) { ... } // small screen / phone
+*/
+
+/* Medium sceeens - tablets */
+@media all and (max-width: 980px) {
+  .image-square.position-far-edge {
+    display: none;
+  }
+}
+
+/* Small Screens - Phones */
+
+@media all and (max-width: 480px) {
+  .image-square.position-edge {
+    display: none;
+  }
 }
