@@ -48,10 +48,6 @@ class Api {
 
     return await ajax
       .get(`${url}?key=${key}&q=${query.trim().replace(/\s+/g, "+")}&image_type=photo`)
-      .then(response => {
-        console.log("response", JSON.stringify(response, null, 2));
-        return response;
-      })
       .catch((err: any) => {
         console.warn("Error in Api.getImages():", err);
       });

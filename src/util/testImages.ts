@@ -1,4 +1,5 @@
 export const testImages = {
+  "cachedAt": Date.now(),
   "query": "transistor",
   "totalHits": 29,
   "hits": [
