@@ -4,6 +4,12 @@
  1000: Carousel Image Area
  2000: Overlay Navigation for Mobile
  */
+ 
+ a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+ }
 
 .carousel {
   background-color: #eaeee7;

@@ -28,13 +28,15 @@ const ImageSquare: React.SFC<any> = (props: any) => {
     <div className={`image-square position-${positionClass[position]}`}>
       <div className={`image-square__container`}>
         <MobileOverlay actions={actions} />
-        <img
-          className={`image-square__primary-image position-${
-            positionClass[position]
-          }`}
-          src={image.largeImageURL}
-          alt={image.tags}
-        />
+        <a href={image.pageURL}>
+          <img
+            className={`image-square__primary-image position-${
+              positionClass[position]
+            }`}
+            src={image.largeImageURL}
+            alt={image.tags}
+          />
+        </a>
       </div>
       <UserCredit {...image} />
     </div>
