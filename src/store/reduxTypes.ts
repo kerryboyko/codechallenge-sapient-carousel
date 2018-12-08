@@ -22,7 +22,7 @@ export const createActionTypes = (
 const actionTypes = {
   carousel: createActionTypes("carousel", "SET_PAGE"),
   debug: createActionTypes("debug", "HYDRATE"),
-  photos: createActionTypes("photos", "LOAD_PHOTOS", "CLEAR_PHOTOS")
+  photos: createActionTypes("photos", "LOAD_PHOTOS", "LOADING")
 }
 
 export default actionTypes; 

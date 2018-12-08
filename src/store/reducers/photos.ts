@@ -22,8 +22,6 @@ export const photos = (
   switch (action.type) {
     case actionTypes.photos.LOAD_PHOTOS:
       return action.payload;
-    case actionTypes.photos.CLEAR_PHOTOS:
-      return initializeState();
     default:
       return state;
   }
@@ -36,6 +34,28 @@ export const photoCache = (
   switch (action.type) {
     case actionTypes.photos.LOAD_PHOTOS:
       return { ...state, [action.payload.query]: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const loading = (state = false, action: IReduxAction = { type: "" }) => {
+  switch (action.type) {
+    case actionTypes.photos.LOADING:
+      return action.payload;
+    case actionTypes.photos.LOAD_PHOTOS:
+      return false;
+    default:
+      return state;
+  }
+};
+
+export const currentQuery = (state = false, action: IReduxAction = { type: "" }) => {
+  switch (action.type) {
+    case actionTypes.photos.LOADING:
+      return action.payload;
+    case actionTypes.photos.LOAD_PHOTOS:
+      return false;
     default:
       return state;
   }

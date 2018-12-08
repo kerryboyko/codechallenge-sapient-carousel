@@ -2,17 +2,14 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import { getPhotos, loadPhotos } from "../store/actions/photos";
-import CarouselHolder from "../components/CarouselHolder";
 import { testImages } from "../util/testImages";
-import wrapAroundSlice from "../util/wrapAroundSlice";
-import { IPixabayImage } from "../store/actions/types";
-import { get } from "lodash";
 import { pagePrev, pageNext } from "../store/actions/carousel";
+import SearchQuery from "../components/SearchQuery";
 
-interface ISearchBoxState {
+interface IMainCarouselState {
   queryField: string;
 }
-export class SearchBox extends React.Component<any, ISearchBoxState> {
+export class MainCarousel extends React.Component<any, IMainCarouselState> {
   constructor(props: any) {
     super(props);
     this.state = { queryField: "" };
@@ -20,12 +17,11 @@ export class SearchBox extends React.Component<any, ISearchBoxState> {
   public render() {
     const { handleQueryChange, handleGetPhotos } = this;
     const { queryField } = this.state;
-    const { actions, images, imagesLoaded } = this.props;
     return (
-      <CarouselHolder
-        images={images}
-        imagesLoaded={imagesLoaded}
-        actions={actions}
+      <SearchQuery
+        handleQueryChange={handleQueryChange}
+        handleGetPhotos={handleGetPhotos}
+        queryField={queryField}
       />
     );
   }
@@ -34,20 +30,9 @@ export class SearchBox extends React.Component<any, ISearchBoxState> {
   };
   private handleGetPhotos = (): void => {
     this.props.actions.getPhotos(this.state.queryField);
+    this.setState({ queryField: "" });
   };
 }
-
-const mapStateToProps = (state: any) => {
-  const imagesInStore: IPixabayImage[] = get(state, "photos.hits", []);
-  const imagesLoaded: boolean = imagesInStore.length > 0;
-  const root = state.carousel;
-  const size = 5; // hardcoded for now, but can be dynamic;
-  const transpose = 2; // again, hardcoded for now.
-  return {
-    images: wrapAroundSlice(imagesInStore, root, size, transpose),
-    imagesLoaded
-  };
-};
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   actions: {
@@ -62,6 +47,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
-)(SearchBox);
+)(MainCarousel);

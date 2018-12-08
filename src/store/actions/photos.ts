@@ -5,7 +5,10 @@ import { Dispatch } from "redux";
 import { get } from "lodash";
 
 const api = new Api();
-
+export const setLoading = (payload: boolean): IReduxAction => ({
+  type: actionTypes.photos.LOADING,
+  payload
+});
 export const loadPhotos = (payload: any): IReduxAction => ({
   type: actionTypes.photos.LOAD_PHOTOS,
   payload
@@ -31,8 +34,17 @@ export const getPhotos = (query: string) => (
     }
     return dispatch(loadPhotos(photoCache[formattedQuery]));
   }
-  return api.getImages(formattedQuery).then((response: any) => {
-    const body: ISearchResult = response.body;
-    dispatch(loadPhotos({ cachedAt: now, query: formattedQuery, ...body }));
-  });
+  dispatch(setLoading(true));
+  return api
+    .getImages(formattedQuery)
+    .then((response: any) => {
+      const body: ISearchResult = response.body;
+      dispatch(loadPhotos({ cachedAt: now, query: formattedQuery, ...body }));
+    })
+    .catch(e => {
+      // perhaps there should be an alert displayed to a user instead of
+      // logging to the console.
+      dispatch(setLoading(false));
+      console.error(e);
+    });
 };

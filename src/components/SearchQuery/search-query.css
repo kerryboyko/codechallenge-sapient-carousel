@@ -1,0 +1,27 @@
+.search-query {
+  padding: 20px 0px;
+  background-color: #eaeee7;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.search-query__search-input {
+  background: transparent;
+  font-family: "Ropa Sans";
+  font-size: 18px;
+  padding: 5px;
+  color: #276696;
+  border: 2px solid #276696;
+  margin-right: 0;
+}
+
+.search-query__search-button {
+  background-color: #276696;
+  font-family: "Ropa Sans";
+  font-size: 18px;
+  padding: 5px;
+  border: 2px solid #276696;
+  color: white;
+  margin-left: 0;
+}
