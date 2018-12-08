@@ -7,6 +7,7 @@ import { testImages } from "../util/testImages";
 import wrapAroundSlice from "../util/wrapAroundSlice";
 import { IPixabayImage } from "../store/actions/types";
 import { get } from "lodash";
+import { pagePrev, pageNext } from '../store/actions/carousel';
 
 interface IMainCarouselState {
   queryField: string;
@@ -22,7 +23,7 @@ export class MainCarousel extends React.Component<any, IMainCarouselState> {
     const { actions, images, imagesLoaded } = this.props;
     return (
       <div className="main-carousel">
-        <CarouselHolder images={images} imagesLoaded={imagesLoaded} />
+        <CarouselHolder images={images} imagesLoaded={imagesLoaded} actions={actions} />
         <div>
           <input onChange={handleQueryChange} value={queryField} />
           <button onClick={handleGetPhotos}>Search</button>
@@ -58,7 +59,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
       (query: string) => getPhotos(query),
       dispatch
     ),
-    loadMockData: bindActionCreators(() => loadPhotos(testImages), dispatch)
+    loadMockData: bindActionCreators(() => loadPhotos(testImages), dispatch),
+    pagePrev: bindActionCreators(pagePrev, dispatch),
+    pageNext: bindActionCreators(pageNext, dispatch),
   }
 });
 

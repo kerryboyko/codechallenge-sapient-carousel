@@ -1,10 +1,10 @@
 import * as React from "react";
 import ImageSquare from "./ImageSquare";
-import PrevNext from "../../containers/PrevNext";
+import PrevNext from "./PrevNext";
 import "./carousel-holder.css";
 
 const CarouselHolder: React.SFC<any> = (props: any) => {
-  const { images, imagesLoaded } = props;
+  const { images, imagesLoaded, actions} = props;
   return (
     <div className="carousel">
       <div className="carousel__header">
@@ -17,12 +17,13 @@ const CarouselHolder: React.SFC<any> = (props: any) => {
               image={image}
               key={image.pageURL || Math.random().toString()}
               position={i}
+              actions={actions}
             />
           ))}
         </div>
       ) : null}
       <div className="carousel__footer-area">
-        <PrevNext {...props} />
+        <PrevNext pagePrev={actions.pagePrev} pageNext={actions.pageNext} />
       </div>
     </div>
   );

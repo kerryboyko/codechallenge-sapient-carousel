@@ -6,11 +6,13 @@ export const carousel = (
   action: ICarouselReduxAction = { type: "" }
 ): number => {
   switch (action.type) {
+    case actionTypes.photos.LOAD_PHOTOS:
+      return 0;
     case actionTypes.carousel.SET_PAGE:
-      if(action.payload !== undefined){
+      if (action.payload !== undefined) {
         return action.payload;
       }
-      return state; 
+      return state;
     default:
       return state;
   }

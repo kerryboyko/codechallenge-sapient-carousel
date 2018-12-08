@@ -1,5 +1,6 @@
 import * as React from "react";
-import UserCredit from "../UserCredit";
+import UserCredit from "./UserCredit";
+import MobileOverlay from "./MobileOverlay";
 /* NB: One side-effect of the implementation is that it takes a little while to load
    each image as the component rerenders and it comes on screen. 
    There are number of approaches one could take to fix this problem:
@@ -13,24 +14,28 @@ import UserCredit from "../UserCredit";
    https://stackoverflow.com/questions/3877027/jquery-callback-on-image-load-even-when-the-image-is-cached
 */
 
-const positionClass: {[key: number]: string}= {
+const positionClass: { [key: number]: string } = {
   0: "far-edge",
   1: "edge",
   2: "center",
   3: "edge",
   4: "far-edge"
-}
+};
+
 const ImageSquare: React.SFC<any> = (props: any) => {
-  const { image, position } = props;
+  const { image, position, actions } = props;
   return (
-    <div
-      className={`image-square position-${positionClass[position]}`}
-    >
-      <img
-        className={`image-square__primary-image position-${positionClass[position]}`}
-        src={image.largeImageURL}
-        alt={image.tags}
-      />
+    <div className={`image-square position-${positionClass[position]}`}>
+      <div className={`image-square__container`}>
+        <MobileOverlay actions={actions} />
+        <img
+          className={`image-square__primary-image position-${
+            positionClass[position]
+          }`}
+          src={image.largeImageURL}
+          alt={image.tags}
+        />
+      </div>
       <UserCredit {...image} />
     </div>
   );

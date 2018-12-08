@@ -47,6 +47,10 @@ I want to get the core front-end build done first, but if time remains, I might 
 
   Lodash is a functional programming library. Much of it is not used because ES7/TS have included much of the core functionality into the language itself, but the key feature of Lodash is that A) It has code-splitting, meaning you don't need to import the whole library into your bundle to use one method, and B) the Lodash "get" method is very good at handling those cases where object.property?.childProperty can occur. That is - if "property" is undefined, trying to access childProperty throws an ugly JS error. get(object, 'property.childProperty', null); handles it gracefully.  Until some form of Maybe monad is standard in the language, I think I'll always have lodash/get in my toolkit. 
 
+* SVG Handling: *react-svg*
+
+  Just a simple library that converts imported SVG images (like our arrow) and turns it into a react component. Doing so allows me to override properties of the component with css, something I couldn't do if I just put it in as the src field of an img tag;  
+
 ## Architecture
 
 Here's the architecture pattern I like to use.  I like to think of the application as a ziggurat - built in layers, with these rules. 

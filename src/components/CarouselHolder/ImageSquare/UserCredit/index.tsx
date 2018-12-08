@@ -25,7 +25,7 @@ const UserCredit: React.SFC<any> = (props: any) => {
           src={props.userImageURL}
           alt={props.user}
         />
-        <div className="user-credit__icon-user__user">{props.user}</div>
+        <div className="user-credit__icon-user__user"><a href={`https://pixabay.com/en/users/${props.user}-${props.user_id}/`}>{props.user}</a></div>
       </div>
       <div className="user-credit__likes">Likes: {props.likes}</div>
     </div>

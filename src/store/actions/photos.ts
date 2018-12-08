@@ -2,7 +2,7 @@ import { IReduxAction, ISearchResult } from "./types";
 import actionTypes from "../reduxTypes";
 import Api from "../../ajax/api";
 import { Dispatch } from "redux";
-import {get} from 'lodash'; 
+import { get } from "lodash";
 
 const api = new Api();
 
@@ -26,8 +26,8 @@ export const getPhotos = (query: string) => (
     photoCache[formattedQuery] &&
     (now - photoCache[formattedQuery].cachedAt) / 36e5 < 24
   ) {
-    if(get(process, 'env.NODE_ENV', "development") === "development"){
-      console.info(`Cache Hit for ${formattedQuery}`)
+    if (get(process, "env.NODE_ENV", "development") === "development") {
+      console.info(`Cache Hit for ${formattedQuery}`);
     }
     return dispatch(loadPhotos(photoCache[formattedQuery]));
   }
