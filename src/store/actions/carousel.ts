@@ -1,6 +1,6 @@
 import actionTypes from "../reduxTypes";
 import { ICarouselReduxAction, IPixabayImage } from "./types";
-import { get } from "lodash";
+import * as get from "lodash.get";
 import { Dispatch } from "redux";
 
 export const setPage = (num: number): ICarouselReduxAction => ({

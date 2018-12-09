@@ -2,7 +2,7 @@ import { IReduxAction, ISearchResult } from "./types";
 import actionTypes from "../reduxTypes";
 import Api from "../../ajax/api";
 import { Dispatch } from "redux";
-import { get } from "lodash";
+import * as get from "lodash.get";
 
 // might want to use dependency injection instead of
 // creating the instance of the Api class here for testing

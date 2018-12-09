@@ -1,82 +1,101 @@
 # Publicis.Sapient Front End Senior Associate Test
+## Candidate: Brian Boyko
 
-## Introduction
-This is a standard test where we expect the developer to respond to several aspects:
+### Installation and execution
 
-1. Ensure the output reflects your understanding of the best current technology
-2. Use of modular JavaScript patterns and/or a JS framework (e.g. Angular, Polymer, React, etc.) to build the necessary functionality
-3. Show how a user interface can operate in different contexts 
-3. Demonstrate your approach to using an API to retrieve data and content
-4. Demonstrate your ability to deliver and enforce high code quality and maintainability
-5. We'd like to see how you use Git in your workflow
-6. Where possible to provide nice flourishes to demonstrate a flair
+Installation: "yarn install" or "npm install"
+Test suite: "yarn test" or "npm run test"
+Development server: "yarn start" or "npm run start"
+Production server: "yarn serve:production" or "npm run serve:production"
 
-## Example of what you will be building
+Default ports: 
+  * Development server: 3000
+  * Production server: 5000
 
-### Mobile
-![Carousel Test Example Mobile](./carousel-mobile.png)
-### Desktop
-![Carousel Test Example Desktop](./carousel-desktop.png)
+### Candidate Decision Making Process Notes
 
-## Brief
-Using the image above as a reference build a mobile-first carousel widget that cycles through six images via the `prev` and `next` buttons. These are styled differently depending on the viewport size.
+Hello. In order to give you an idea of my thought process during this code challenge, I will be providing notes in this document. 
 
-To obtain the images please use our Pixabay account, details below. Once they are available to the app load them into the carousel and enable the functionality for the buttons.
+This repository was created with Create-React-App, using the ts-scripts to add typescript support.  
 
-Feel free to use whatever tools seem most appropriate for managing styles.
+#### Interesting Decisions:
 
-Please do not spend more than three hours on this test. **It's not important to complete the code** in the time that you have, but it is important that you are able to demonstrate your thinking via documentation and additional information.
+* Since we have to provide the API key to the client, there's not really any point in keeping it secret. However, a more secure system would be to provide an API interface to our own backend, and call the Pixabay API from there. 
 
-We do not expect a high amount of unit test coverage for this project given the short timeframe. However, we are keen to see tests for the most important functions.
+One interesting thing is that Pixabay requires caching every 24 hours. That implies to me the API is not meant to be accessed directly from the client, but to access a backend server that has some sort of caching.  
 
-Keep the carousel itself quite simple in terms of how it responds; it doesn't need to snap. Concentrate on the quality of the code.
+If the scope of the assignment was larger, I would have built a little microservice using NeDB/Node/Express to do server-side caching. 
 
-## Pixabay API
-API url `https://pixabay.com/api/`
-API key: `9656065-a4094594c34f9ac14c7fc4c39`
-Documentation: `https://pixabay.com/api/docs/`
-Example search: `https://pixabay.com/api/?key=9656065-a4094594c34f9ac14c7fc4c39&q=beautiful+landscape&image_type=photo`
-This will return an object with a `hits` property, which will be an array of images. Relevant properties in the request result are:
-`hits[0].imageURL` 
-`hits[0].user` 
-`hits[0].likes`
+I did create a little caching in-memory on the client side in the store (mainly there to show off, but also shows how this can limit the number of API calls needed to a backend) 
 
-### Typeface
-Use `Ropa Sans` as the typeface for the text, which is available through [Google Fonts here](https://fonts.google.com/specimen/Ropa+Sans)
+* Because I didn't want to complicate things, I chose NOT to eject the React-Create-App to create Webpack scripts.  This did limit me - I had to use straight CSS instead of my preferred Sass, but it cuts down on the amount of code that you have to read and I have to maintain to present the project without ejecting.  
 
-### Images
-Use the SVG included in this directory for the arrow icons
+* I spent significanly more than three hours on this test. 
 
-![arrow](./arrow.svg)
+It states that I should not spend more than three hours on the test in the README, but I've taken much longer. 
 
-## How it should work
-* The 'active' carousel item is always centred in its container
-* When you click the `prev` button, it should centre the previous item
-* When you click the `next` button, it should centre the next item
-* As you scale up the browser window more of the carousel becomes visible
-* It should run in the last two versions of Chrome, Firefox, Safari and Edge
+While time constraints are always a part of software development, it is always better to downscope a project than to sacrifice code quality.  Downscoping this project to what could be accomplished in three hours - while still maintaining code quality - would have reduced the features it to the point of absurdity. 
 
-## Evaluation criteria
-We will assess your work on the following basis:
-
-* Code structure, quality and consistency
-* Technology choices
-* Accessibility
-* Cross browser compatibility 
-* Responsiveness
-* Attention to detail
-* Clear documentation
-* Dependency management
-* Test quality
-* Git commit history
+Because I think you are more interested in the quality of work I can do, rather than necessarily the speed at which I do it, I decided to take more time than allotted. 
 
 
-## Rules
-* You can install any core library you like (e.g. React, Angular, Vue, etc.) **BUT…**
-* Please **DO NOT** use a 3rd party carousel plugin - we want to see your JS skills
+### Libraries chosen (and why): 
 
-### Git
-Please initialise a new git repository and commit your changes whenever you feel necessary. We will review your git commit history log.
+* Language: *Typescript*
 
-# Conclusion
-When you've finished, please zip up the repository and email it to your Publicis.Sapient hiring contact.
+  When possible, I like to use Typescript instead of standard Javascript. There is a time tradeoff in setup, but with good tooling and linters, you can catch potential errors before you build.  This is not a hard requirement but one which I think makes sense for this project.  
+
+  There are a few areas where I could have gotten more specific with the typing, but sometimes, using "any" is just fine for the purposes of a code challenge. 
+
+* Framework: *React/Redux* 
+
+  Because the position is primarily going to be working with React, I chose that framework. I also chose to use Redux as a state manager for the same reason (despite the project being small enough that Redux was not strictly necessary). 
+
+* Unit Testing: *Jest/Enzyme*
+
+  I've used Mocha, but Jest is really designed for mocking APIs and handling promises elegantly. I like that you can put your test files alongside your source code, as that allows you to have at-a-glance visibility into what features and functions have test coverage.  100% coverage is not always feasible (and usually neither required nor desired) but the key areas to test would be the API code and the state manager. 
+
+  Testing that rendering meets expectations is tricker, but I did do some of that using the Enzyme library on the main components.  
+
+* Client-Side Ajax: *Superagent*
+
+  There are a number of libraries for making API calls, Superagent for me has always been simple and straightforward, although I've used others, such as fetch and axios. 
+
+* Package Manager: *Yarn*
+
+  Yarn is fundimentally the same in practice as NPM, but allows you to download packages to your hard drive, saving install time. 
+
+* Styles: *CSS*
+
+  I love Sass, but because I don't want to eject this project, I'll stick with CSS. If I needed a little bit more flexibility in changing CSS behavior, however, I would have used Aphrodite, a JS library that creates dynamic CSS on-the-fly in your JS files. 
+
+* Utilities: *Lodash*
+
+  Lodash is a functional programming library. Much of it is not used because ES7/TS have included much of the core functionality into the language itself, but the key feature of Lodash is that A) It has code-splitting, meaning you don't need to import the whole library into your bundle to use one method, and B) the Lodash "get" method is very good at handling those cases where object.property?.childProperty can occur. That is - if "property" is undefined, trying to access childProperty throws an ugly JS error. get(object, 'property.childProperty', null); handles it gracefully.  Until some form of Maybe monad is standard in the language, I think I'll always have lodash/get in my toolkit. 
+
+* SVG Handling: *react-svg*
+
+  Just a simple library that converts imported SVG images (like our arrow) and turns it into a react component. Doing so allows me to override properties of the component with css, something I couldn't do if I just put it in as the src field of an img tag;  
+
+### Architecture
+
+Here's the architecture pattern I like to use.  I like to think of the application as a ziggurat - built in layers, with these rules. 
+
+* A lower layer should have no dependencies upon a higher layer. 
+* No layer should mutate the state of another layer except by calling provided exposed functions (Kind of like object-oriented encapsulation, but across a number of classes.) 
+* Lower layers should propagate information about the application state to the higher layers, and provide callbacks that the higher level layers can call to change state. 
+
+For this application, I'm choosing this structure: 
+
+```
+------ Structure/Styling (HTML/CSS); 
+----- Stateless Components (Takes props, outputs JSX)
+---- Containers (Local application state, interface with redux)
+--- State Manager (Redux)
+-- Framework (React base)
+- API Interface Library (SuperAgent)
+```
+
+### Original Brief
+
+The original brief can be found in this repository at ./doc/README.md

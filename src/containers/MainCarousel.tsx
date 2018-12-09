@@ -4,7 +4,7 @@ import { bindActionCreators, Dispatch } from "redux";
 import CarouselHolder from "../components/CarouselHolder";
 import wrapAroundSlice from "../util/wrapAroundSlice";
 import { IPixabayImage } from "../store/actions/types";
-import { get } from "lodash";
+import * as get from "lodash.get";
 import { pagePrev, pageNext } from "../store/actions/carousel";
 
 interface IMainCarouselState {

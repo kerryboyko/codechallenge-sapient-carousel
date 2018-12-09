@@ -3,10 +3,9 @@ import { createLogger } from "redux-logger";
 import thunk from "redux-thunk";
 import * as carousel from "./reducers/carousel";
 import * as photos from "./reducers/photos";
-import { get } from "lodash";
 import actionTypes from "./reduxTypes";
 
-const environment: string = get(process, "env.NODE_ENV", "development");
+const environment: string | undefined = process.env.NODE_ENV;
 
 const middlewares: any[] = [thunk];
 if (environment === "development") {
