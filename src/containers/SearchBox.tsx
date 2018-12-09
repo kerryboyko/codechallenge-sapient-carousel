@@ -1,8 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
-import { getPhotos, loadPhotos } from "../store/actions/photos";
-import { testImages } from "../util/testImages";
+import { getPhotos } from "../store/actions/photos";
 import { pagePrev, pageNext } from "../store/actions/carousel";
 import SearchQuery from "../components/SearchQuery";
 
@@ -40,7 +39,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
       (query: string) => getPhotos(query),
       dispatch
     ),
-    loadMockData: bindActionCreators(() => loadPhotos(testImages), dispatch),
     pagePrev: bindActionCreators(pagePrev, dispatch),
     pageNext: bindActionCreators(pageNext, dispatch)
   }

@@ -18,9 +18,14 @@
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "eject": "react-scripts-ts eject",
+    "lint": "tslint src/**/*.ts{,x}",
+    "tslint-check": "tslint-config-prettier-check ./tslint.json",
+    "prettier": "prettier --write src/**/*.ts{,x}"
   },
   "devDependencies": {
+    "@types/enzyme": "^3.1.15",
+    "@types/enzyme-adapter-react-16": "^1.0.3",
     "@types/jest": "^23.3.10",
     "@types/lodash": "^4.14.119",
     "@types/node": "^10.12.12",
@@ -30,6 +35,12 @@
     "@types/react-svg": "^5.0.0",
     "@types/redux-logger": "^3.0.6",
     "@types/superagent": "^3.8.5",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "jest-enzyme": "^7.0.1",
+    "prettier": "^1.15.3",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.17.0",
     "typescript": "^3.2.1"
   }
 }

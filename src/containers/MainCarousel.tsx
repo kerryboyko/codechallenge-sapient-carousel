@@ -34,7 +34,7 @@ const mapStateToProps = (state: any) => {
     imagesLoaded,
     currentQuery: state.photos.query,
     isNoHits: state.photos.query !== "" && state.photos.hits.length === 0,
-    isLoading: state.loading,
+    isLoading: state.loading
   };
 };
 

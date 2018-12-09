@@ -24,11 +24,11 @@ const wrapAroundSlice = (
     return [];
   }
   if (size > length) {
-    // a quick and dirty recursive solution, just cloning/doubling the array till it gets there. 
-    // There are certainly more efficient algorithms, but for the actual use case here, 
+    // a quick and dirty recursive solution, just cloning/doubling the array till it gets there.
+    // There are certainly more efficient algorithms, but for the actual use case here,
     // this solution is *fine*, and should never result in more than 3 recursions in practice.
     // (for an arr of one element and a size of 5.)
-    return wrapAroundSlice(arr.concat(arr), root, size, transpose); 
+    return wrapAroundSlice(arr.concat(arr), root, size, transpose);
   }
   if (transpose > size) {
     throw new Error(

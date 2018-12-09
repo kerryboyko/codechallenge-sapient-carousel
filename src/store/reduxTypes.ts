@@ -6,8 +6,6 @@
  * It also makes the redux logs easier to read.
  */
 
-
-
 export const createActionTypes = (
   ns: string,
   ...terms: string[]
@@ -23,6 +21,6 @@ const actionTypes = {
   carousel: createActionTypes("carousel", "SET_PAGE"),
   debug: createActionTypes("debug", "HYDRATE"),
   photos: createActionTypes("photos", "LOAD_PHOTOS", "LOADING")
-}
+};
 
-export default actionTypes; 
+export default actionTypes;
