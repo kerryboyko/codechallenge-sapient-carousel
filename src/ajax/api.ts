@@ -35,10 +35,6 @@ class Api {
     this.url = url;
     this.key = key;
   }
-  public debugInfo() {
-    const { url, key } = this;
-    return { url, key };
-  }
   public async getImages(query: string): Promise<any> {
     const { testDelay, ajax, url, key } = this;
 

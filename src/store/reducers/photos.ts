@@ -49,14 +49,3 @@ export const loading = (state = false, action: IReduxAction = { type: "" }) => {
       return state;
   }
 };
-
-export const currentQuery = (state = false, action: IReduxAction = { type: "" }) => {
-  switch (action.type) {
-    case actionTypes.photos.LOADING:
-      return action.payload;
-    case actionTypes.photos.LOAD_PHOTOS:
-      return false;
-    default:
-      return state;
-  }
-};

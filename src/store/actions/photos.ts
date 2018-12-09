@@ -4,20 +4,21 @@ import Api from "../../ajax/api";
 import { Dispatch } from "redux";
 import { get } from "lodash";
 
+// might want to use dependency injection instead of
+// creating the instance of the Api class here for testing
 const api = new Api();
+
 export const setLoading = (payload: boolean): IReduxAction => ({
   type: actionTypes.photos.LOADING,
   payload
 });
+
 export const loadPhotos = (payload: any): IReduxAction => ({
   type: actionTypes.photos.LOAD_PHOTOS,
   payload
 });
 
-export const clearPhotos = (): IReduxAction => ({
-  type: actionTypes.photos.CLEAR_PHOTOS
-});
-
+/* This function might do too much.  Refactor? */
 export const getPhotos = (query: string) => (
   dispatch: Dispatch,
   getState: any

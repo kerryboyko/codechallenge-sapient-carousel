@@ -37,7 +37,7 @@ describe("createActionTypes", () => {
       HYDRATE: "debug.HYDRATE"
     });
     expect(actionTypes.photos).toEqual({
-      CLEAR_PHOTOS: "photos.CLEAR_PHOTOS",
+      LOADING: "photos.LOADING",
       LOAD_PHOTOS: "photos.LOAD_PHOTOS"
     });
   });

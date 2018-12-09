@@ -1,5 +1,5 @@
-import { photos, photoCache, IPhotosState } from "./photos";
-import { loadPhotos } from "../actions/photos";
+import { photos, photoCache, IPhotosState, loading } from "./photos";
+import { loadPhotos, setLoading } from "../actions/photos";
 
 describe("./src/reducers/carousel.ts", () => {
   describe("photos", () => {
@@ -29,6 +29,16 @@ describe("./src/reducers/carousel.ts", () => {
         foo,
         bar
       });
+    });
+  });
+  describe("loading", () => {
+    it("tells us if we are waiting to load images", () => {
+      const testStateFalse: boolean = false;
+      const testStateTrue: boolean = true;
+      expect(loading()).toBe(false);
+      expect(loading(testStateFalse, setLoading(true))).toBe(true);
+      expect(loading(testStateTrue, setLoading(false))).toBe(false);
+      expect(loading(testStateTrue, loadPhotos({}))).toBe(false);
     });
   });
 });

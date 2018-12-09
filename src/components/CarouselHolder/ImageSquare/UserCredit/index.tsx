@@ -16,6 +16,11 @@ import * as React from "react";
    https://stackoverflow.com/questions/12354865/image-onload-event-and-browser-cache
    https://stackoverflow.com/questions/3877027/jquery-callback-on-image-load-even-when-the-image-is-cached
 */
+const handleImageError = (e: React.SyntheticEvent<Element>) => {
+  const target: any = e.target;
+  target.onerror! = null;
+  target.style!.display = "none";
+};
 const UserCredit: React.SFC<any> = (props: any) => {
   return (
     <div className="user-credit">
@@ -24,8 +29,17 @@ const UserCredit: React.SFC<any> = (props: any) => {
           className="user-credit__icon-user__icon"
           src={props.userImageURL}
           alt={props.user}
+          onError={handleImageError}
         />
-        <div className="user-credit__icon-user__user"><a href={`https://pixabay.com/en/users/${props.user}-${props.user_id}/`}>{props.user}</a></div>
+        <div className="user-credit__icon-user__user">
+          <a
+            href={`https://pixabay.com/en/users/${props.user}-${
+              props.user_id
+            }/`}
+          >
+            {props.user}
+          </a>
+        </div>
       </div>
       <div className="user-credit__likes">Likes: {props.likes}</div>
     </div>
