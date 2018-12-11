@@ -1,6 +1,36 @@
 # Publicis.Sapient Front End Senior Associate Test
 ## Candidate: Brian Boyko
 
+### Note: There is a potential security vulnerability in this test. See below.
+
+The results of a "yarn audit" command will yield: 
+
+```
+$ yarn audit
+yarn audit v1.12.3
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ high          │ Missing Origin Validation                                    │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ webpack-dev-server                                           │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Patched in    │ >=3.1.6                                                      │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ react-scripts-ts                                             │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ react-scripts-ts > webpack-dev-server                        │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://nodesecurity.io/advisories/725                       │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+1 vulnerabilities found - Packages audited: 18560
+Severity: 1 High
+```
+
+A bit of background - as this is a code-challenge assignment, and not a production assignment, I used Create-React-App with react-scripts-ts to quickly bootstrap a typescript based React framework. The problem is that the TS version of react scripts still uses the old version of the webpack-dev-server with this vulnerability.
+
+The solution would be to run yarn eject to eject the package then upgrade webpack-dev-server, however webpack-dev-server >=3.1.6 requires webpack >= 4.0.0 and webpack's configuration for both dev and prod would have to be migrated from webpack 3 format to webpack 4 format.  Suffice to say, these are breaking changes and would take a significant effort. 
+
+For the very limited purposes of this code challenge, I am leaving this as a known vulnerability. 
+
 ### Installation and execution
 
 Installation: "yarn install" or "npm install"
