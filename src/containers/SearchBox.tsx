@@ -5,10 +5,10 @@ import { getPhotos } from "../store/actions/photos";
 import { pagePrev, pageNext } from "../store/actions/carousel";
 import SearchQuery from "../components/SearchQuery";
 
-interface IMainCarouselState {
+interface ISearchBoxState {
   queryField: string;
 }
-export class MainCarousel extends React.Component<any, IMainCarouselState> {
+export class SearchBox extends React.Component<any, ISearchBoxState> {
   constructor(props: any) {
     super(props);
     this.state = { queryField: "" };
@@ -47,4 +47,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export default connect(
   null,
   mapDispatchToProps
-)(MainCarousel);
+)(SearchBox);
