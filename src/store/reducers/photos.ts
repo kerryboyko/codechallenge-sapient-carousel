@@ -40,7 +40,6 @@ export const {actions, reducer} = photosSlice;
 export const getPhotos = (query: string) => async (dispatch: any, getState: any) => {
   const formattedQuery: string = query.trim().replace(/\s+/g, "+");
   const state = getState();
-  console.log(state);
   const photoCache = state.photos.photoCache
   const now = Date.now();
   if (
