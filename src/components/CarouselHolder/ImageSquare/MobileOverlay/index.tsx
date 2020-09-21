@@ -1,8 +1,8 @@
 import * as React from "react";
-import ReactSVG from "react-svg";
+import {ReactSVG} from "react-svg";
 import arrowSrc from "../../../../images/arrow.svg";
 
-const MobileOverlay: React.SFC<any> = (props: any) => {
+const MobileOverlay: React.FC<any> = (props: any) => {
   const {actions} = props;
   return (
     <div className={`mobile-overlay`}>

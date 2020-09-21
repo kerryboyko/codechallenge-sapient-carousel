@@ -1,19 +1,36 @@
-import actionTypes from "../reduxTypes";
-import { ICarouselReduxAction } from "../actions/types";
+import {createSlice} from '@reduxjs/toolkit';
+import get from 'lodash/get'; 
 
-export const carousel = (
-  state: number = 0,
-  action: ICarouselReduxAction = { type: "" }
-): number => {
-  switch (action.type) {
-    case actionTypes.photos.LOAD_PHOTOS:
-      return 0;
-    case actionTypes.carousel.SET_PAGE:
-      if (action.payload !== undefined) {
-        return action.payload;
-      }
-      return state;
-    default:
-      return state;
+const carouselSlice = createSlice({
+  name: 'carousel',
+  initialState: {
+    page: 0,
+  },
+  reducers: {
+    setPage: (state, action) => {
+      state.page = action.payload;
+    }
+  },
+  extraReducers: {
+    ['photos/loadPhotos']: (state) => {
+      state.page = 0; 
+    }
   }
+})
+
+export const {actions, reducer} = carouselSlice;
+
+const pageTo = (addToPage: number) => (dispatch: any, getState: any) => {
+  const currentState = getState();
+  const currentPage = currentState.carousel.page;
+  const hits: any[] = get(currentState, "photos.hits", []);
+  const length: number = hits.length; 
+  if (length === 0) {
+    return dispatch(actions.setPage(0));
+  }
+  return dispatch(actions.setPage((currentPage + addToPage + length) % length));
 };
+export const pagePrev = () => pageTo(-1);
+export const pageNext = () => pageTo(1);
+
+export default reducer; 
