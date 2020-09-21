@@ -23,7 +23,7 @@ export const {actions, reducer} = carouselSlice;
 const pageTo = (addToPage: number) => (dispatch: any, getState: any) => {
   const currentState = getState();
   const currentPage = currentState.carousel.page;
-  const hits: any[] = get(currentState, "photos.hits", []);
+  const hits: any[] = get(currentState, "photos.photos.hits", []);
   const length: number = hits.length; 
   if (length === 0) {
     return dispatch(actions.setPage(0));

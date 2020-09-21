@@ -33,7 +33,7 @@ const CarouselDisplayArea = (props: any) => {
   return <div />;
 };
 
-const CarouselHolder: React.SFC<any> = (props: any) => {
+const CarouselHolder: React.FC<any> = (props: any) => {
   const { actions } = props;
   return (
     <div className="carousel">

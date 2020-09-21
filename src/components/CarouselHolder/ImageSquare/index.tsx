@@ -22,7 +22,7 @@ const positionClass: { [key: number]: string } = {
   4: "far-edge"
 };
 
-const ImageSquare: React.SFC<any> = (props: any) => {
+const ImageSquare: React.FC<any> = (props: any) => {
   const { image, position, actions } = props;
   return (
     <div className={`image-square position-${positionClass[position]}`}>
